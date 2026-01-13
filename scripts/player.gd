@@ -15,7 +15,7 @@ enum PlayerState {
 @export var acceleration = 400
 @export var deceleration = 400
 
-const SPEED = 100.0
+const SPEED = 80.0
 const JUMP_VELOCITY = -400.0
 
 var status: PlayerState
@@ -53,12 +53,15 @@ func _physics_process(delta: float) -> void:
 func go_to_idle_down_state():
 	status = PlayerState.idle_down
 	anim.play("idle_down")
+	direction_y = 0
 func go_to_idle_up_state():
 	status = PlayerState.idle_up
 	anim.play("idle_up")
+	direction_y = 0
 func go_to_idle_side_state():
 	status = PlayerState.idle_side
 	anim.play("idle_side")
+	direction_x = 0
 func go_to_walk_down_state():
 	status = PlayerState.walk_down
 	anim.play("walk_down")
@@ -71,35 +74,32 @@ func go_to_walk_side_state():
 	
 func idle_down_state(delta):
 	move_y(delta)
-	
-	direction_press()
+	direction_press(delta)
 	
 func idle_up_state(delta):
 	move_y(delta)
-	
-	direction_press()
+	direction_press(delta)
 func idle_side_state(delta):
-	move(delta)
-	
-	direction_press()
-func walk_down_state(_delta):
+	move_x(delta)
+	direction_press(delta)
+func walk_down_state(delta):
+	move_y(delta)
 	if Input.is_action_just_released("ui_down"):
 		go_to_idle_down_state()
 		return
-func walk_up_state(_delta):
+func walk_up_state(delta):
+	move_y(delta)
 	if Input.is_action_just_released("ui_up"):
 		go_to_idle_up_state()
 		return
 func walk_side_state(delta):
-	move(delta)
-	if Input.is_action_just_released("ui_right"):
-		go_to_idle_side_state()
-		return
-	elif  Input.is_action_just_released("ui_left"):
+	move_x(delta)
+	if Input.is_action_just_released("ui_right") or Input.is_action_just_released("ui_left"):
 		go_to_idle_side_state()
 		return
 	
-func update_direction_x():
+	
+func update_direction():
 	direction_x = Input.get_axis("ui_left", "ui_right")
 	
 	if direction_x < 0:
@@ -108,34 +108,33 @@ func update_direction_x():
 		anim.flip_h = false
 		
 
-func move(delta):
-	update_direction_x()
+func move_x(delta):
+	update_direction()
 	
-	if direction_x:
+	if direction_x != 0:
 		velocity.x = move_toward(velocity.x, direction_x * max_speed, acceleration * delta)
+		
 	else:
 		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
-	
+	return
+
 func move_y(delta):
 	direction_y = Input.get_axis("ui_up", "ui_down")
-	
-	if direction_y:
+	if direction_y != 0:
 		velocity.y = move_toward(velocity.y, direction_y * max_speed, acceleration * delta)
 	else:
 		velocity.y = move_toward(velocity.y, 0, deceleration * delta)
-		
-		
+	return
 	
-func direction_press():
+			
+	
+func direction_press(_delta):
 	if Input.is_action_just_pressed("ui_down"):
 		go_to_walk_down_state()
 		return
 	elif Input.is_action_just_pressed("ui_up"):
 		go_to_walk_up_state()
 		return
-	elif Input.is_action_just_pressed("ui_right"):
+	elif Input.is_action_just_pressed("ui_right") or Input.is_action_just_pressed("ui_left"):
 		go_to_walk_side_state()
 		return
-	elif Input.is_action_just_pressed("ui_left"):
-		go_to_walk_side_state()
-	return
