@@ -11,11 +11,16 @@ enum PlayerState {
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
+@export var max_speed = 80.0
+@export var acceleration = 400
+@export var deceleration = 400
+
 const SPEED = 100.0
 const JUMP_VELOCITY = -400.0
 
 var status: PlayerState
-var direction = 0
+var direction_x = 0
+var direction_y = 0
 
 
 func _physics_process(delta: float) -> void:
@@ -64,52 +69,19 @@ func go_to_walk_side_state():
 	status = PlayerState.walk_side
 	anim.play("walk_side")
 	
-func idle_down_state(_delta):
-		
-	if Input.is_action_just_pressed("ui_down"):
-		go_to_walk_down_state()
-		return
-	if Input.is_action_just_pressed("ui_up"):
-		go_to_walk_up_state()
-		return
-	if Input.is_action_just_pressed("ui_right"):
-		go_to_walk_side_state()
-		return
-	if Input.is_action_just_pressed("ui_left"):
-		direction = -1
-		go_to_walk_side_state()
-		return
-func idle_up_state(_delta):
+func idle_down_state(delta):
+	move_y(delta)
 	
-	if Input.is_action_just_pressed("ui_down"):
-		go_to_walk_down_state()
-		return
-	if Input.is_action_just_pressed("ui_up"):
-		go_to_walk_up_state()
-		return
-	if Input.is_action_just_pressed("ui_right"):
-		go_to_walk_side_state()
-		return
-	if Input.is_action_just_pressed("ui_left"):
-		direction = -1
-		go_to_walk_side_state()
-		return
+	direction_press()
+	
+func idle_up_state(delta):
+	move_y(delta)
+	
+	direction_press()
 func idle_side_state(delta):
 	move(delta)
 	
-	if Input.is_action_just_pressed("ui_down"):
-		go_to_walk_down_state()
-		return
-	if Input.is_action_just_pressed("ui_up"):
-		go_to_walk_up_state()
-		return
-	if Input.is_action_just_pressed("ui_right"):
-		go_to_walk_side_state()
-		return
-	if Input.is_action_just_pressed("ui_left"):
-		direction = -1
-		go_to_walk_side_state()
-		return
+	direction_press()
 func walk_down_state(_delta):
 	if Input.is_action_just_released("ui_down"):
 		go_to_idle_down_state()
@@ -118,8 +90,8 @@ func walk_up_state(_delta):
 	if Input.is_action_just_released("ui_up"):
 		go_to_idle_up_state()
 		return
-func walk_side_state(_delta):
-	move(_delta)
+func walk_side_state(delta):
+	move(delta)
 	if Input.is_action_just_released("ui_right"):
 		go_to_idle_side_state()
 		return
@@ -127,21 +99,43 @@ func walk_side_state(_delta):
 		go_to_idle_side_state()
 		return
 	
-func update_direction():
-	direction = Input.get_axis("ui_left", "ui_right")
+func update_direction_x():
+	direction_x = Input.get_axis("ui_left", "ui_right")
 	
-	if direction < 0:
+	if direction_x < 0:
 		anim.flip_h = true
-	elif  direction > 0:
+	elif  direction_x > 0:
 		anim.flip_h = false
-	
-	#if direction_x:
-		#velocity.x = direction_x * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
+		
 
-
-func move(_delta):
-	update_direction()
+func move(delta):
+	update_direction_x()
 	
+	if direction_x:
+		velocity.x = move_toward(velocity.x, direction_x * max_speed, acceleration * delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
 	
+func move_y(delta):
+	direction_y = Input.get_axis("ui_up", "ui_down")
+	
+	if direction_y:
+		velocity.y = move_toward(velocity.y, direction_y * max_speed, acceleration * delta)
+	else:
+		velocity.y = move_toward(velocity.y, 0, deceleration * delta)
+		
+		
+	
+func direction_press():
+	if Input.is_action_just_pressed("ui_down"):
+		go_to_walk_down_state()
+		return
+	elif Input.is_action_just_pressed("ui_up"):
+		go_to_walk_up_state()
+		return
+	elif Input.is_action_just_pressed("ui_right"):
+		go_to_walk_side_state()
+		return
+	elif Input.is_action_just_pressed("ui_left"):
+		go_to_walk_side_state()
+	return
