@@ -113,11 +113,10 @@ animations = [{
 "speed": 3.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ahudb"]
-radius = 5.0
-height = 16.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0kkn"]
+size = Vector2(12, 5)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 motion_mode = 1
 script = ExtResource("1_b0kkn")
 
@@ -126,4 +125,5 @@ sprite_frames = SubResource("SpriteFrames_ripyi")
 animation = &"walk_side"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_ahudb")
+position = Vector2(-1, 5.5)
+shape = SubResource("RectangleShape2D_b0kkn")

@@ -53,15 +53,12 @@ func _physics_process(delta: float) -> void:
 func go_to_idle_down_state():
 	status = PlayerState.idle_down
 	anim.play("idle_down")
-	direction_y = 0
 func go_to_idle_up_state():
 	status = PlayerState.idle_up
 	anim.play("idle_up")
-	direction_y = 0
 func go_to_idle_side_state():
 	status = PlayerState.idle_side
 	anim.play("idle_side")
-	direction_x = 0
 func go_to_walk_down_state():
 	status = PlayerState.walk_down
 	anim.play("walk_down")
@@ -110,7 +107,7 @@ func update_direction():
 
 func move_x(delta):
 	update_direction()
-	
+	velocity.y = move_toward(velocity.y, 0, deceleration * delta)
 	if direction_x != 0:
 		velocity.x = move_toward(velocity.x, direction_x * max_speed, acceleration * delta)
 		
@@ -120,6 +117,7 @@ func move_x(delta):
 
 func move_y(delta):
 	direction_y = Input.get_axis("ui_up", "ui_down")
+	velocity.x = move_toward(velocity.x, 0, deceleration * delta)
 	if direction_y != 0:
 		velocity.y = move_toward(velocity.y, direction_y * max_speed, acceleration * delta)
 	else:
@@ -129,12 +127,12 @@ func move_y(delta):
 			
 	
 func direction_press(_delta):
-	if Input.is_action_just_pressed("ui_down"):
+	if Input.is_action_pressed("ui_down"):
 		go_to_walk_down_state()
 		return
-	elif Input.is_action_just_pressed("ui_up"):
+	elif Input.is_action_pressed("ui_up"):
 		go_to_walk_up_state()
 		return
-	elif Input.is_action_just_pressed("ui_right") or Input.is_action_just_pressed("ui_left"):
+	elif Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left"):
 		go_to_walk_side_state()
 		return
