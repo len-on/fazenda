@@ -1,11 +1,50 @@
-extends Area2D
+extends StaticBody2D
 
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var start_timer: Timer = $StartTimer
+@onready var timer_2: Timer = $Timer2
+@onready var area_2d: Area2D = $Area2D
 
-# Called when the node enters the scene tree for the first time.
+var start_position: Vector2
+var is_plant = false
+var player_inside = false
+
 func _ready() -> void:
+	start_position = global_position
+	anim.visible = false
+
+
+func _process(_delta: float) -> void:
+	if player_inside == true and is_plant == false:
+		if Input.is_action_just_pressed("ui_farming"):
+			plant()
+
+
+func plant():
+	print("plantou")
+	if is_plant:
+		return
+
+	is_plant = true
+	anim.visible = true
+	anim.play("grow")
+	
+
+func _on_start_timer_timeout() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_regen_timer_timeout() -> void:
+	pass # Replace with function body.
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	print("entrou")
+	if body.is_in_group("Player"):
+		player_inside = true
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	print("saiu")
+	if body.is_in_group("Player"):
+		player_inside = false

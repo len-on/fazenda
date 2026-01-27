@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://d0gurqoqiywqv" path="res://entities/plant.tscn" id="4_j5742"]
 
 [node name="principal" type="Node2D"]
+metadata/_edit_vertical_guides_ = [123.0, 144.0, 165.0, 119.0, 139.0, 160.0, 181.0, 185.0]
+metadata/_edit_horizontal_guides_ = [174.0, 180.0, 196.0, 202.0, 218.0, 224.0, 240.0, 246.0]
 
 [node name="cenario" parent="." instance=ExtResource("1_1k33c")]
 
@@ -16,14 +18,49 @@ position = Vector2(284, 206)
 position = Vector2(284, 205)
 zoom = Vector2(3, 3)
 
-[node name="Plant" parent="." instance=ExtResource("4_j5742")]
-position = Vector2(129, 164)
+[node name="Plants" type="Node" parent="."]
 
-[node name="Plant2" parent="." instance=ExtResource("4_j5742")]
-position = Vector2(144, 164)
+[node name="Plant" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(131, 166)
 
-[node name="Plant3" parent="." instance=ExtResource("4_j5742")]
-position = Vector2(159, 164)
+[node name="Plant2" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(152, 166)
 
-[node name="Plant4" parent="." instance=ExtResource("4_j5742")]
-position = Vector2(174, 164)
+[node name="Plant3" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(173, 166)
+
+[node name="Plant4" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(131, 188)
+
+[node name="Plant5" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(152, 188)
+
+[node name="Plant6" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(173, 188)
+
+[node name="Plant7" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(131, 210)
+
+[node name="Plant8" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(152, 210)
+
+[node name="Plant9" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(173, 210)
+
+[node name="Plant10" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(131, 232)
+
+[node name="Plant11" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(152, 232)
+
+[node name="Plant12" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(173, 232)
+
+[node name="Plant13" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(131, 254)
+
+[node name="Plant14" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(152, 254)
+
+[node name="Plant15" parent="Plants" instance=ExtResource("4_j5742")]
+position = Vector2(173, 254)
