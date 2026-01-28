@@ -9,7 +9,10 @@ enum PlayerState {
 	walk_side,
 	farming_down,
 	farming_up,
-	farming_side
+	farming_side,
+	irrigating_down,
+	irrigating_up,
+	irrigating_side
 }
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
@@ -53,7 +56,12 @@ func _physics_process(delta: float) -> void:
 			farming_up_state(delta)
 		PlayerState.farming_side:
 			farming_side_state(delta)
-
+		PlayerState.irrigating_down:
+			irrigating_down_state(delta)
+		PlayerState.irrigating_up:
+			irrigating_up_state(delta)
+		PlayerState.irrigating_side:
+			irrigating_side_state(delta)
 	
 	
 	# Handle jump.
@@ -102,19 +110,37 @@ func go_to_farming_up_state():
 func go_to_farming_side_state():
 	status = PlayerState.farming_side
 	anim.play("farming_side")
+	
+func go_to_irrigating_down_state():
+	status = PlayerState.irrigating_down
+	anim.play("irrigating_down")
+
+func go_to_irrigating_up_state():
+	status = PlayerState.irrigating_up
+	anim.play("irrigating_up")
+	
+func go_to_irrigating_side_state():
+	status = PlayerState.irrigating_side
+	anim.play("irrigating_side")
 
 func idle_down_state(delta):
 	move_y(delta)
 	direction_press(delta)
-	if Input.is_action_just_pressed("ui_farming"):
+	if Input.is_action_pressed("ui_farming"):
 		go_to_farming_down_state()
+		return
+	elif Input.is_action_pressed("ui_irrigating"):
+		go_to_irrigating_down_state()
 		return
 	
 func idle_up_state(delta):
 	move_y(delta)
 	direction_press(delta)
-	if Input.is_action_just_pressed("ui_farming"):
+	if Input.is_action_pressed("ui_farming"):
 		go_to_farming_up_state()
+		return
+	elif Input.is_action_pressed("ui_irrigating"):
+		go_to_irrigating_up_state()
 		return
 	
 func idle_side_state(delta):
@@ -122,6 +148,9 @@ func idle_side_state(delta):
 	direction_press(delta)
 	if Input.is_action_just_pressed("ui_farming"):
 		go_to_farming_side_state()
+		return
+	elif Input.is_action_pressed("ui_irrigating"):
+		go_to_irrigating_side_state()
 		return
 	
 	
@@ -156,6 +185,21 @@ func farming_up_state(_delta):
 
 func farming_side_state(_delta):
 	if Input.is_action_just_released("ui_farming"):
+		go_to_idle_side_state()
+		return
+
+func irrigating_down_state(_delta):
+	if Input.is_action_just_released("ui_irrigating"):
+		go_to_idle_down_state()
+		return
+
+func irrigating_up_state(_delta):
+	if Input.is_action_just_released("ui_irrigating"):
+		go_to_idle_up_state()
+		return
+	
+func irrigating_side_state(_delta):
+	if Input.is_action_just_released("ui_irrigating"):
 		go_to_idle_side_state()
 		return
 	

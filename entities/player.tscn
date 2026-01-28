@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://buvqpgjba3kcu"]
+[gd_scene load_steps=34 format=3 uid="uid://buvqpgjba3kcu"]
 
 [ext_resource type="Script" uid="uid://d3rbh4imofwsn" path="res://scripts/player.gd" id="1_b0kkn"]
 [ext_resource type="Texture2D" uid="uid://3gj7ppffyh2a" path="res://sprites/free_farm_character_walk_frame32x32.png" id="2_e4p34"]
 [ext_resource type="Texture2D" uid="uid://d848je0igrda" path="res://sprites/free_farm_character_shovel.png" id="2_rfe5m"]
+[ext_resource type="Texture2D" uid="uid://du3i4mirj6y0f" path="res://sprites/irrigating.png" id="4_rfe5m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qly61"]
 atlas = ExtResource("2_rfe5m")
@@ -50,6 +51,34 @@ region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0jhex"]
 atlas = ExtResource("2_e4p34")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ef06p"]
+atlas = ExtResource("4_rfe5m")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjdhl"]
+atlas = ExtResource("4_rfe5m")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0i8f"]
+atlas = ExtResource("4_rfe5m")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i614"]
+atlas = ExtResource("4_rfe5m")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oprnr"]
+atlas = ExtResource("4_rfe5m")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rie4"]
+atlas = ExtResource("4_rfe5m")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp3pk"]
+atlas = ExtResource("4_rfe5m")
 region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_38am0"]
@@ -154,6 +183,42 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ef06p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjdhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0i8f")
+}],
+"loop": true,
+"name": &"irrigating_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0i614")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oprnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rie4")
+}],
+"loop": true,
+"name": &"irrigating_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dp3pk")
+}],
+"loop": true,
+"name": &"irrigating_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_38am0")
 }, {
 "duration": 1.0,
@@ -204,7 +269,8 @@ script = ExtResource("1_b0kkn")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.92, 0.92)
 sprite_frames = SubResource("SpriteFrames_ripyi")
-animation = &"farming_side"
+animation = &"irrigating_up"
+frame_progress = 0.050437868
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -35,9 +35,6 @@ region = Rect2(0, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_3bbf0")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_6j4ds")
 }, {
 "duration": 1.0,
@@ -58,6 +55,14 @@ animations = [{
 "loop": false,
 "name": &"grow",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3bbf0")
+}],
+"loop": true,
+"name": &"planted",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6j4ds"]
@@ -72,9 +77,12 @@ script = ExtResource("1_3bbf0")
 shape = SubResource("RectangleShape2D_mncn7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3.874302e-07, 3.874302e-07)
+scale = Vector2(0.50000006, 0.50000006)
 sprite_frames = SubResource("SpriteFrames_t1mub")
 animation = &"grow"
-frame_progress = 0.55149573
+frame = 5
+frame_progress = 0.37499523
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
