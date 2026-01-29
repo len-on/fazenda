@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq38ovw7va6th"
-path="res://.godot/imported/irrigating.png-c8517bed8ad069856d3768e1da5ca510.ctex"
+uid="uid://bxma77k8g1315"
+path="res://.godot/imported/cuting.png-4ac6cdd86a677003ddad73b1b8101ac0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/irrigating.png"
-dest_files=["res://.godot/imported/irrigating.png-c8517bed8ad069856d3768e1da5ca510.ctex"]
+source_file="res://sprites/cuting.png"
+dest_files=["res://.godot/imported/cuting.png-4ac6cdd86a677003ddad73b1b8101ac0.ctex"]
 
 [params]
 

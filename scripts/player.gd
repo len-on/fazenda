@@ -12,7 +12,10 @@ enum PlayerState {
 	farming_side,
 	irrigating_down,
 	irrigating_up,
-	irrigating_side
+	irrigating_side,
+	cuting_down,
+	cuting_up,
+	cuting_side
 }
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
@@ -62,6 +65,12 @@ func _physics_process(delta: float) -> void:
 			irrigating_up_state(delta)
 		PlayerState.irrigating_side:
 			irrigating_side_state(delta)
+		PlayerState.cuting_down:
+			cuting_down_state(delta)
+		PlayerState.cuting_up:
+			cuting_up_state(delta)
+		PlayerState.cuting_side:
+			cuting_side_state(delta)
 	
 	
 	# Handle jump.
@@ -122,6 +131,18 @@ func go_to_irrigating_up_state():
 func go_to_irrigating_side_state():
 	status = PlayerState.irrigating_side
 	anim.play("irrigating_side")
+	
+func go_to_cuting_down_state():
+	status = PlayerState.cuting_down
+	anim.play("cuting_down")
+
+func go_to_cuting_up_state():
+	status = PlayerState.cuting_up
+	anim.play("cuting_up")
+	
+func go_to_cuting_side_state():
+	status = PlayerState.cuting_side
+	anim.play("cuting_side")
 
 func idle_down_state(delta):
 	move_y(delta)
@@ -131,6 +152,9 @@ func idle_down_state(delta):
 		return
 	elif Input.is_action_pressed("ui_irrigating"):
 		go_to_irrigating_down_state()
+		return
+	elif Input.is_action_pressed("ui_collect"):
+		go_to_cuting_down_state()
 		return
 	
 func idle_up_state(delta):
@@ -142,6 +166,9 @@ func idle_up_state(delta):
 	elif Input.is_action_pressed("ui_irrigating"):
 		go_to_irrigating_up_state()
 		return
+	elif Input.is_action_pressed("ui_collect"):
+		go_to_cuting_up_state()
+		return
 	
 func idle_side_state(delta):
 	move_x(delta)
@@ -151,6 +178,9 @@ func idle_side_state(delta):
 		return
 	elif Input.is_action_pressed("ui_irrigating"):
 		go_to_irrigating_side_state()
+		return
+	elif Input.is_action_pressed("ui_collect"):
+		go_to_cuting_side_state()
 		return
 	
 	
@@ -200,6 +230,21 @@ func irrigating_up_state(_delta):
 	
 func irrigating_side_state(_delta):
 	if Input.is_action_just_released("ui_irrigating"):
+		go_to_idle_side_state()
+		return
+	
+func cuting_down_state(_delta):
+	if Input.is_action_just_released("ui_collect"):
+		go_to_idle_down_state()
+		return
+
+func cuting_up_state(_delta):
+	if Input.is_action_just_released("ui_collect"):
+		go_to_idle_up_state()
+		return
+	
+func cuting_side_state(_delta):
+	if Input.is_action_just_released("ui_collect"):
 		go_to_idle_side_state()
 		return
 	

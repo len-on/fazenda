@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0gurqoqiywqv"]
+[gd_scene load_steps=14 format=3 uid="uid://d0gurqoqiywqv"]
 
 [ext_resource type="Script" uid="uid://b5d8co16fdl76" path="res://scripts/plant.gd" id="1_3bbf0"]
 [ext_resource type="Texture2D" uid="uid://cuppbj5f5ig6e" path="res://sprites/plant_hole3.png" id="2_3bbf0"]
@@ -6,6 +6,10 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mncn7"]
 size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bbf0"]
+atlas = ExtResource("3_t1mub")
+region = Rect2(96, 0, 32, 29)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6j4ds"]
 atlas = ExtResource("3_t1mub")
@@ -33,6 +37,14 @@ region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t1mub"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bbf0")
+}],
+"loop": true,
+"name": &"collected",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6j4ds")
@@ -80,9 +92,7 @@ shape = SubResource("RectangleShape2D_mncn7")
 position = Vector2(3.874302e-07, 3.874302e-07)
 scale = Vector2(0.50000006, 0.50000006)
 sprite_frames = SubResource("SpriteFrames_t1mub")
-animation = &"grow"
-frame = 5
-frame_progress = 0.37499523
+animation = &"collected"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
@@ -94,7 +104,9 @@ debug_color = Color(0.9462299, 0.1233769, 0.49808854, 0.41960785)
 
 [node name="StartTimer" type="Timer" parent="."]
 
-[node name="Timer2" type="Timer" parent="."]
+[node name="RestartTimer" type="Timer" parent="."]
+wait_time = 5.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]

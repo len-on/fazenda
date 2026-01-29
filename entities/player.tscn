@@ -1,9 +1,46 @@
-[gd_scene load_steps=34 format=3 uid="uid://buvqpgjba3kcu"]
+[gd_scene load_steps=45 format=3 uid="uid://buvqpgjba3kcu"]
 
 [ext_resource type="Script" uid="uid://d3rbh4imofwsn" path="res://scripts/player.gd" id="1_b0kkn"]
 [ext_resource type="Texture2D" uid="uid://3gj7ppffyh2a" path="res://sprites/free_farm_character_walk_frame32x32.png" id="2_e4p34"]
+[ext_resource type="Texture2D" uid="uid://bxma77k8g1315" path="res://sprites/cuting.png" id="2_qly61"]
 [ext_resource type="Texture2D" uid="uid://d848je0igrda" path="res://sprites/free_farm_character_shovel.png" id="2_rfe5m"]
-[ext_resource type="Texture2D" uid="uid://du3i4mirj6y0f" path="res://sprites/irrigating.png" id="4_rfe5m"]
+[ext_resource type="Texture2D" uid="uid://cq38ovw7va6th" path="res://sprites/irrigating.png" id="4_rfe5m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgp7q"]
+atlas = ExtResource("2_qly61")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n8aq"]
+atlas = ExtResource("2_qly61")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28s6d"]
+atlas = ExtResource("2_qly61")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cicqb"]
+atlas = ExtResource("2_qly61")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hj0ki"]
+atlas = ExtResource("2_qly61")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fruft"]
+atlas = ExtResource("2_qly61")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slxql"]
+atlas = ExtResource("2_qly61")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evlff"]
+atlas = ExtResource("2_qly61")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7db53"]
+atlas = ExtResource("2_qly61")
+region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qly61"]
 atlas = ExtResource("2_rfe5m")
@@ -65,21 +102,24 @@ region = Rect2(32, 0, 32, 32)
 atlas = ExtResource("4_rfe5m")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0i614"]
-atlas = ExtResource("4_rfe5m")
-region = Rect2(0, 64, 32, 32)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0i614"]
+load_path = "res://.godot/imported/irrigating.png-c8517bed8ad069856d3768e1da5ca510.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oprnr"]
-atlas = ExtResource("4_rfe5m")
-region = Rect2(32, 64, 32, 32)
+atlas = SubResource("CompressedTexture2D_0i614")
+region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8rie4"]
-atlas = ExtResource("4_rfe5m")
-region = Rect2(64, 64, 32, 32)
+atlas = SubResource("CompressedTexture2D_0i614")
+region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dp3pk"]
+atlas = SubResource("CompressedTexture2D_0i614")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i614"]
 atlas = ExtResource("4_rfe5m")
-region = Rect2(32, 96, 32, 32)
+region = Rect2(0, 96, 29, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_38am0"]
 atlas = ExtResource("2_e4p34")
@@ -115,6 +155,51 @@ region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ripyi"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgp7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n8aq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28s6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n8aq")
+}],
+"loop": true,
+"name": &"cuting_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cicqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hj0ki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fruft")
+}],
+"loop": true,
+"name": &"cuting_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slxql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evlff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7db53")
+}],
+"loop": true,
+"name": &"cuting_up",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qly61")
@@ -197,13 +282,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0i614")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_oprnr")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8rie4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dp3pk")
 }],
 "loop": true,
 "name": &"irrigating_side",
@@ -211,11 +296,11 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dp3pk")
+"texture": SubResource("AtlasTexture_0i614")
 }],
 "loop": true,
 "name": &"irrigating_up",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -269,8 +354,8 @@ script = ExtResource("1_b0kkn")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.92, 0.92)
 sprite_frames = SubResource("SpriteFrames_ripyi")
-animation = &"irrigating_up"
-frame_progress = 0.050437868
+animation = &"cuting_down"
+frame_progress = 0.2797681
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
